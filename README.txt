@@ -12,5 +12,4 @@ A portable, low-cost optical sensor for community-based monitoring of nitrates a
 COMING SOON
 Automatic data shared online.
 
-For any information contact steven.loiselle@unisi.it // riccardogaetano.cirrone@unipa.it // amedeo.boldrini3@unisi.it // alessio.polvani@student.unisi.it
-
+For any information contact riccardogaetano.cirrone@unipa.it
