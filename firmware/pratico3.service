@@ -1,0 +1,15 @@
+[Unit]
+Description=PRATICO 3 field program (buttons + LCD)
+After=basic.target
+
+[Service]
+Type=simple
+WorkingDirectory=@FWDIR@
+ExecStart=/usr/bin/python3 -u @FWDIR@/pratico3_usr.py
+Restart=on-failure
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=10
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use PRATICO, please cite the article below."
+title: "PRATICO - low-cost colorimeter for nitrate and phosphate"
+type: software
+license: GPL-3.0
+repository-code: "https://github.com/LowCostSensor/PRATICO-sensor"
+version: 3.0.0
+authors:
+  - family-names: Cirrone
+    given-names: Riccardo Gaetano
+preferred-citation:
+  type: article
+  title: "Low-Cost Optical Sensing for Nitrate and Phosphate: Advancing Community Freshwater Monitoring"
+  authors:
+    - family-names: Cirrone
+      given-names: Riccardo Gaetano
+    - family-names: Boldrini
+      given-names: A.
+    - family-names: Polvani
+      given-names: A.
+    - family-names: Arrigucci
+      given-names: M.
+    - family-names: Liu
+      given-names: X.
+    - family-names: Galgani
+      given-names: L.
+    - family-names: Woods
+      given-names: S.
+    - family-names: Loiselle
+      given-names: S. A.
+  journal: "ACS ES&T Water"
+  year: 2025
+  volume: 5
+  start: 6258
+  end: 6267
+  doi: "10.1021/acsestwater.5c00314"
