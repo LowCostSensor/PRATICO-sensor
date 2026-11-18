@@ -29,9 +29,10 @@ settings. Use the **same settings and the same reaction time** that you will use
 
 ```bash
 ssh fww@pratico.local
-cd ~/PRATICO_3/firmware
-python3 pratico3_cal.py -a B -r 2      # both analytes, 2 replicates per level
+pratico-cal -a B -r 2      # both analytes, 2 replicates per level
 ```
+
+From a git checkout: `python3 ~/PRATICO_3/firmware/pratico3_cal.py` with the same options.
 
 | Option | Meaning |
 |---|---|
@@ -72,7 +73,7 @@ The field program is stopped automatically while the calibration runs and restar
 from the saved readings and leave that level out:
 
 ```bash
-python3 ~/PRATICO_3/firmware/pratico3_cal.py --refit ~/PRATICO_3/calibration/cal_P_20261118-120223.csv --exclude 0.05
+pratico-cal --refit ~/PRATICO_3/calibration/cal_P_20261118-120223.csv --exclude 0.05
 ```
 
 It prints the same table, asks before saving, writes a `_refit_<date>.txt` report and restarts the

@@ -28,7 +28,7 @@ paper are also frozen in the v2.0.0 release.
 ## Getting started (PRATICO 3)
 
 1. **Build it**: [docs/1-build.md](docs/1-build.md). Print the enclosure, mount the optics, wire the Pi.
-2. **Set up the Raspberry Pi**: [docs/2-raspberry-setup.md](docs/2-raspberry-setup.md). OS, I²C, Python packages, firmware, start at power-on.
+2. **Set up the Raspberry Pi**: [docs/2-raspberry-setup.md](docs/2-raspberry-setup.md). OS, I²C, firmware (`pipx install pratico-sensor`), start at power-on.
 3. **Calibrate**: [docs/3-calibration.md](docs/3-calibration.md). Standards, blanks, fit, quality checks.
 4. **Measure in the field**: [docs/4-field-use.md](docs/4-field-use.md). Buttons, LCD messages, results file.
 

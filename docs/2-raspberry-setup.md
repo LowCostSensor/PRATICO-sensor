@@ -31,28 +31,55 @@ i2cdetect -y 3     # LCD at 0x27
 **If `i2cdetect -y 1` is very slow or times out on every address**, SDA or SCL is shorted or stuck
 low. This happened on the first PRATICO 3 build because of a solder bridge.
 
-## 3. Python packages
+## 3. Firmware
+
+The firmware is on PyPI as [`pratico-sensor`](https://pypi.org/project/pratico-sensor/). `pipx`
+installs it with its Python packages in a separate environment:
 
 ```bash
-sudo apt install -y python3-pip
-pip3 install --break-system-packages -r ~/PRATICO_3/firmware/requirements.txt
+sudo apt install -y pipx python3-dev
+pipx install pratico-sensor
+pipx ensurepath                 # adds ~/.local/bin to PATH: log out and in again
 ```
+
+Then:
+
+```bash
+pratico-selftest                # hardware self test
+pratico-service install         # start the field program at every power-on
+```
+
+| Command | What it does |
+|---|---|
+| `pratico-selftest` | hardware self test |
+| `pratico-cal` | calibration ([3-calibration.md](3-calibration.md)) |
+| `pratico-field` | field program, normally started by the service ([4-field-use.md](4-field-use.md)) |
+| `pratico-service install` / `uninstall` / `status` | the boot service |
+
+Upgrade with `pipx upgrade pratico-sensor`, then `pratico-service install` again to restart the field
+program on the new version. Calibration and results in `~/PRATICO_3/` are kept.
 
 The user needs to be in the `gpio` and `i2c` groups. The default user created by the Imager already
 is.
 
-## 4. Firmware
-
-Copy the `firmware/` folder to `~/PRATICO_3/firmware`. Either run
-`git clone https://github.com/LowCostSensor/PRATICO-sensor` and copy it, or use `scp` from a PC. Then:
+<details><summary>Without pipx (from a git checkout)</summary>
 
 ```bash
-python3 ~/PRATICO_3/firmware/pratico3_core.py      # hardware self test
-bash ~/PRATICO_3/firmware/install.sh               # start the field program at every power-on
+git clone https://github.com/LowCostSensor/PRATICO-sensor
+cp -r PRATICO-sensor/firmware ~/PRATICO_3/firmware
+pip3 install --break-system-packages -r ~/PRATICO_3/firmware/requirements.txt
+python3 ~/PRATICO_3/firmware/pratico3_core.py      # = pratico-selftest
+bash ~/PRATICO_3/firmware/install.sh               # = pratico-service install
 ```
 
-`install.sh` installs `pratico3.service` as a systemd **user** service, which needs no sudo. To start
-at boot without anyone logging in, *linger* must be enabled once:
+The other commands are `python3 pratico3_cal.py` and `python3 pratico3_usr.py` in the same folder.
+Don't use both installs at once: the boot service runs whichever was installed last.
+</details>
+
+## 4. Start at power-on
+
+`pratico-service install` installs `pratico3.service` as a systemd **user** service, which needs no
+sudo. To start at boot without anyone logging in, *linger* must be enabled once:
 
 ```bash
 sudo loginctl enable-linger fww
@@ -79,8 +106,9 @@ calibration in `~/PRATICO_3/calibration/`.
 
 ## 5. Settings
 
-All acquisition settings are in `firmware/pratico3_config.json`. Copy it to
-`~/PRATICO_3/pratico3_config.json` to override them without touching the repository copy.
+The defaults are built into the firmware (and listed in `firmware/pratico3_config.json`). To change
+a setting, create `~/PRATICO_3/pratico3_config.json` with only the keys you change, for example
+`{"gain": 48}`. `pratico-selftest` prints which config file is used.
 
 | Key | Default | Meaning |
 |---|---|---|

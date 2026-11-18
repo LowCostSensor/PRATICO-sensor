@@ -54,6 +54,7 @@ DEFAULT_CONFIG = {
     "target_fs": [0.20, 0.75],    # blank window (fraction of 65535) for auto-range
     "autorange_on_blank": True,   # step the gain down if the blank saturates
     "reaction_time_s": {"N": 0, "P": 0},   # >0: countdown from reagent addition to reading
+    "cal_levels": {"N": [0.2, 0.5, 1, 2, 5, 10], "P": [0.02, 0.05, 0.1, 0.2, 0.5, 1]},  # mg/L
     "accept_recovery_pct": 15,    # calibration QC band for back-calculated standards
     "led_gpio": 26,
     "button_ok_gpio": 4,
@@ -522,7 +523,8 @@ def selftest(simulate=False):
     cfg = load_config()
     hw = make_hw(cfg, simulate=simulate)
     try:
-        print(f"PRATICO 3 core {VERSION}  config {config_path()}")
+        cp = config_path()
+        print(f"PRATICO 3 core {VERSION}  config {cp if os.path.exists(cp) else 'built-in defaults'}")
         print(f"setting {hw.gain}x / {hw.integration_ms} ms / rate {hw.rate_ms} ms")
         hw.show("PRATICO 3", "self test")
         m = measure_cycle(hw, cfg)
@@ -540,5 +542,14 @@ def selftest(simulate=False):
         hw.close()
 
 
+def main(argv=None):
+    """pratico-selftest: hardware self test (or --simulate without hardware)."""
+    import argparse
+    ap = argparse.ArgumentParser(description="PRATICO 3 hardware self test")
+    ap.add_argument("--simulate", action="store_true", help="no hardware (PC test)")
+    ap.add_argument("--version", action="version", version=f"PRATICO 3 firmware {VERSION}")
+    return selftest(simulate=ap.parse_args(argv).simulate)
+
+
 if __name__ == "__main__":
-    raise SystemExit(selftest(simulate="--simulate" in sys.argv))
+    raise SystemExit(main())

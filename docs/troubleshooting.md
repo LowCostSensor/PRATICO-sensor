@@ -19,5 +19,6 @@ Logs:
 ```bash
 journalctl --user-unit=pratico3 -n 50       # field program
 ls ~/PRATICO_3/logs/                         # every reading with raw conversions
-python3 ~/PRATICO_3/firmware/pratico3_core.py   # hardware self test
+pratico-selftest                             # hardware self test
+pratico-service status                       # boot service installed / running?
 ```

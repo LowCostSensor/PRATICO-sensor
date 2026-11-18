@@ -108,8 +108,8 @@ and the cap on · Dopo l'installazione del software, con la cuvetta piena d'acqu
 ```bash
 i2cdetect -y 1          # 29 = LTR-329
 i2cdetect -y 3          # 27 = LCD
-python3 ~/PRATICO_3/firmware/pratico3_core.py   # self test / autotest
-python3 tools/gpio_test.py                      # buttons and LED / pulsanti e LED (optional)
+pratico-selftest        # self test / autotest
+python3 tools/gpio_test.py   # buttons and LED / pulsanti e LED (optional, from the repository)
 ```
 
 | What a good build shows (96× / 200 ms) | Cosa mostra uno strumento ben montato |

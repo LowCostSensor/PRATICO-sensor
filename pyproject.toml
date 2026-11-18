@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pratico-sensor"
+dynamic = ["version"]
+description = "PRATICO 3 firmware: low-cost Raspberry Pi colorimeter for nitrate and phosphate (FreshWater Watch kits)"
+readme = "docs/pypi.md"
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
+authors = [{ name = "Riccardo Gaetano Cirrone" }]
+requires-python = ">=3.9"
+keywords = ["colorimeter", "nitrate", "phosphate", "raspberry-pi", "citizen-science", "water-quality"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+# Hardware libraries only on the Raspberry Pi: on a PC the package installs for --simulate tests.
+dependencies = [
+    "adafruit-blinka; platform_system == 'Linux' and platform_machine in 'aarch64 armv7l armv6l'",
+    "gpiod>=2.2.2,<3; platform_system == 'Linux' and platform_machine in 'aarch64 armv7l armv6l'",
+    "adafruit-circuitpython-ltr329-ltr303>=3.0.6; platform_system == 'Linux' and platform_machine in 'aarch64 armv7l armv6l'",
+    "RPLCD>=1.3; platform_system == 'Linux' and platform_machine in 'aarch64 armv7l armv6l'",
+    "smbus2; platform_system == 'Linux' and platform_machine in 'aarch64 armv7l armv6l'",
+    "RPi.GPIO; platform_system == 'Linux' and platform_machine in 'aarch64 armv7l armv6l'",
+]
+
+[project.scripts]
+pratico-field = "pratico3_usr:main"
+pratico-cal = "pratico3_cal:main"
+pratico-selftest = "pratico3_core:main"
+pratico-service = "pratico3_service:main"
+
+[project.urls]
+Homepage = "https://github.com/LowCostSensor/PRATICO-sensor"
+Documentation = "https://github.com/LowCostSensor/PRATICO-sensor/tree/main/docs"
+Changelog = "https://github.com/LowCostSensor/PRATICO-sensor/blob/main/CHANGELOG.md"
+Paper = "https://doi.org/10.1021/acsestwater.5c00314"
+
+[tool.setuptools]
+package-dir = { "" = "firmware" }
+py-modules = ["pratico3_core", "pratico3_cal", "pratico3_usr", "pratico3_service"]
+
+[tool.setuptools.dynamic]
+version = { attr = "pratico3_core.VERSION" }

@@ -24,11 +24,15 @@
 - Optional reaction-time countdown from reagent addition to reading, the same in calibration and
   field use.
 - Calibration (`pratico3_cal.py`): replicates, reagent blanks, recovery of every level, residual sd
-  in mg/L, LOD/LOQ, exclude or re-include levels. Saved as JSON, with a CSV and a text report.
+  in mg/L, LOD/LOQ, exclude or re-include levels, refit from saved readings (`--refit`). Saved as
+  JSON, with a CSV and a text report.
 - Field program (`pratico3_usr.py`): MODE switches analyte, holding MODE takes a new blank. Shows
   `<LOD` and over-range flags. Results go to CSV, written to the SD card before they are displayed.
 - Settings in `pratico3_config.json`. The field program runs as a systemd user service at power-on.
 - `--simulate` mode for testing without hardware.
+- Installable from PyPI: `pipx install pratico-sensor`, with the commands `pratico-field`,
+  `pratico-cal`, `pratico-selftest` and `pratico-service install`. Published from GitHub releases
+  with trusted publishing.
 
 ### Repository
 - Restructured: `firmware/`, `hardware/`, `docs/`, `tools/`, `legacy/pratico2/`.
