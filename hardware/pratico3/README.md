@@ -24,13 +24,17 @@
 | 1 | 5 mm LED, 525 nm (green) | |
 | 1 | LCD 1602 with I²C backpack (PCF8574, 0x27) | e.g. Freenove I²C LCD 1602 |
 | 2 | 6 × 6 mm tactile switch | OK and MODE |
-| – | Female–female Dupont jumper wires | |
 | 1 | Cuvette, 10 mm path (12.5 × 12.5 × 46 mm outer, 10 × 10 mm inner) | macro cuvette, 1.5–2 mL |
-| 3 | M3 heat-set insert + M3 countersunk screw | optical block → base (from below) |
+| 5 | M3 heat-set insert (Ø 4 × 6 mm) | 3 in the optical block, 2 in the front posts of the base |
+| 3 | M3 × 8 countersunk screw | optical block → base, from below |
+| 2 | M3 × 6 countersunk screw | lid → front posts |
+| 4 | M2 × 10 countersunk screw | lid → LCD corners → base posts |
 | 2 | M2 × 6 screw | LTR‑329 → optical block |
 | 4 | M2 × 5 screw | Pi Zero 2 W → standoffs |
-| – | Lid screws | <!-- TODO (author): type, length and number for the final lid --> to be confirmed |
+| 2 | M2 × 4 screw | button carrier → lid |
+| 14 | Female–female Dupont wires | LTR‑329 4, LCD 4, buttons 4, LED 2 |
 | – | Black matte PLA, about 60 g | the inside of the box is part of the optics, so use black and matte |
+<!-- TODO (author): screw lengths are derived from the CAD (lid 1.6 mm, insert 6 mm, LCD stack 6.3 mm); confirm them on the printed unit. -->
 
 Optional, recommended: an LED driver (NPN transistor such as BC547/2N2222 from 5 V, 100 Ω series and
 1 kΩ base resistors) or at least a series resistor. Driven straight from a 3.3 V GPIO, the LED current

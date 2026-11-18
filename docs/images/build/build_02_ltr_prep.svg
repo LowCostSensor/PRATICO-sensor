@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520">
+<rect width="900" height="520" fill="#ffffff"/>
+<text x="28.0" y="70.0" font-family="Helvetica, Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="start" fill="#1d1d1d">2</text>
+<polygon points="273.9,430.2 130.0,276.8 130.0,256.4 273.9,409.8" fill="#c4c4c4" stroke="#1d1d1d" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="273.9,430.2 630.0,303.6 630.0,283.2 273.9,409.8" fill="#d3d3d3" stroke="#1d1d1d" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M273.9,409.8 L630.0,283.2 L486.1,129.8 L130.0,256.4 Z" fill="#e2e2e2" fill-rule="evenodd" stroke="#1d1d1d" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="306.5,369.0 304.5,367.2 302.0,365.7 299.1,364.4 295.9,363.5 292.5,363.0 289.0,362.8 285.4,363.0 282.0,363.5 278.8,364.4 276.0,365.7 273.5,367.2 271.4,369.0 269.9,371.0 269.0,373.1 268.7,375.2 269.0,377.4 269.9,379.5 271.4,381.5 273.5,383.2 276.0,384.8 278.8,386.0 282.0,386.9 285.4,387.5 289.0,387.7 292.5,387.5 295.9,386.9 299.1,386.0 302.0,384.8 304.5,383.2 306.5,381.5 308.0,379.5 308.9,377.4 309.2,375.2 308.9,373.1 308.0,371.0" fill="#fff" stroke="#1d1d1d" stroke-width="0.8" stroke-linejoin="round"/>
+<polygon points="488.6,158.1 486.5,156.4 484.0,154.8 481.2,153.6 478.0,152.7 474.6,152.1 471.0,151.9 467.5,152.1 464.1,152.7 460.9,153.6 458.0,154.8 455.5,156.4 453.5,158.1 452.0,160.1 451.1,162.2 450.8,164.4 451.1,166.5 452.0,168.6 453.5,170.6 455.5,172.4 458.0,173.9 460.9,175.1 464.1,176.1 467.5,176.6 471.0,176.8 474.6,176.6 478.0,176.1 481.2,175.1 484.0,173.9 486.5,172.4 488.6,170.6 490.1,168.6 491.0,166.5 491.3,164.4 491.0,162.2 490.1,160.1" fill="#fff" stroke="#1d1d1d" stroke-width="0.8" stroke-linejoin="round"/>
+<polygon points="404.9,250.5 452.5,233.5 433.1,212.8 385.5,229.8" fill="#fff" stroke="#1d1d1d" stroke-width="0.8" stroke-linejoin="round"/>
+<polyline points="432.8,246.3 405.2,217.0" fill="none" stroke="#1d1d1d" stroke-width="1.0" stroke-linecap="round"/>
+<polygon points="335.1,373.4 314.6,351.5 314.6,319.6 335.1,341.5" fill="#5e5e5e" stroke="#1d1d1d" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="335.1,373.4 548.2,297.7 548.2,265.8 335.1,341.5" fill="#6c6c6c" stroke="#1d1d1d" stroke-width="1.3" stroke-linejoin="round"/>
+<path d="M335.1,341.5 L548.2,265.8 L527.7,243.9 L314.6,319.6 Z" fill="#7d7d7d" fill-rule="evenodd" stroke="#1d1d1d" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="360.2,318.0 360.2,242.8" fill="none" stroke="#1d1d1d" stroke-width="1.2" stroke-linecap="round"/>
+<polyline points="395.8,305.4 395.8,230.1" fill="none" stroke="#1d1d1d" stroke-width="1.2" stroke-linecap="round"/>
+<polyline points="431.4,292.7 431.4,217.4" fill="none" stroke="#1d1d1d" stroke-width="1.2" stroke-linecap="round"/>
+<polyline points="467.0,280.1 467.0,204.8" fill="none" stroke="#1d1d1d" stroke-width="1.2" stroke-linecap="round"/>
+<polyline points="502.6,267.4 502.6,192.1" fill="none" stroke="#1d1d1d" stroke-width="1.2" stroke-linecap="round"/>
+<text x="390.7" y="191.4" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1d1d1d">SJ1</text>
+<g transform="translate(560,250) scale(1.4) rotate(-35)"><rect x="0" y="-5.5" width="40" height="11" rx="3" fill="#fff" stroke="#1d1d1d" stroke-width="1.6"/><polygon points="40,-4 58,-4 70,4 40,4" fill="#fff" stroke="#1d1d1d" stroke-width="1.4" stroke-linejoin="round"/></g>
+<g transform="translate(560,420) scale(1.2) rotate(-35)"><path d="M-14,0 C-24,0 -26,14 -36,14" fill="none" stroke="#1d1d1d" stroke-width="1.6"/><rect x="-14" y="-7" width="38" height="14" rx="6" fill="#fff" stroke="#1d1d1d" stroke-width="1.6"/><rect x="24" y="-4.5" width="10" height="9" fill="#fff" stroke="#1d1d1d" stroke-width="1.4"/><rect x="34" y="-2.5" width="26" height="5" fill="#fff" stroke="#1d1d1d" stroke-width="1.4"/><polygon points="60,-2.5 72,0 60,2.5" fill="#fff" stroke="#1d1d1d" stroke-width="1.4"/></g>
+<polygon points="805,105.2 822.0,134.8 788.0,134.8" fill="#fff" stroke="#1d1d1d" stroke-width="2.2" stroke-linejoin="round"/><text x="805.0" y="128.8" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#1d1d1d">!</text>
+<text x="805.0" y="175.0" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1d1d1d">SJ1 ✂</text>
+</svg>
