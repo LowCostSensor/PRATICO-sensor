@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Docs
+- Printable PDF guides in `docs/pdf/`: Build Guide and User Guide (field measurement, quality
+  control, calibration with a standards dilution table, data download, maintenance, field data sheet).
+  HTML sources and render script in `docs/pdf/src/`.
+
 ## v3.0.0 – PRATICO 3 (unreleased)
 
 ### Hardware

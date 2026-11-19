@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PRATICO 3 Build Guide</title>
+<link rel="stylesheet" href="guide.css">
+<style>
+@page { @bottom-left { content: "PRATICO 3 · Build Guide · v1.0"; } }
+.toc { columns: 2; column-gap: 10mm; }
+.toc li { break-inside: avoid; }
+.toc li .d { display: none; }
+</style>
+</head>
+<body>
+<span class="doc-title">PRATICO 3 Build Guide</span>
+
+<!-- ======================= COVER ======================= -->
+<section class="cover">
+  <div class="band">
+    <div class="kicker">PRATICO 3 · Low-cost colorimeter for nitrate and phosphate</div>
+    <h1>Build Guide</h1>
+    <div class="sub">How to print, assemble, wire, install and test a PRATICO 3 instrument, from a box of parts to a working colorimeter.</div>
+  </div>
+  <div class="photo"><img src="../../images/pratico3_photo_top.jpg" alt="PRATICO 3 held in one hand"></div>
+  <div class="meta">
+    <div class="for">Prepared for the National Water Resources Management Agency (NWRMA), Sierra Leone</div>
+    <div style="text-align:right">Guide version 1.0 · November 2026<br>Firmware <b>3.0.0</b> · Hardware <b>PRATICO 3</b></div>
+  </div>
+</section>
+
+<!-- ======================= INTRO ======================= -->
+<h1><span class="num">0</span>About this guide</h1>
+
+<p class="lead">PRATICO 3 is a pocket colorimeter. It reads the colour that the FreshWater Watch (FWW) nitrate and phosphate test kits produce and converts it into a concentration in mg/L. This guide takes you from the parts to an instrument that has passed its acceptance test and is ready for calibration. Calibration and field use are described in the separate <b>PRATICO 3 User Guide</b>.</p>
+
+<div class="facts">
+  <div class="fact"><div class="v">N‑NO₃ · P‑PO₄</div><div class="k">nitrate and phosphate, with FWW kits</div></div>
+  <div class="fact"><div class="v">85 × 60 × 44 mm</div><div class="k">3D-printed enclosure, fits in one hand</div></div>
+  <div class="fact"><div class="v">&lt; €50</div><div class="k">parts per instrument (printer and tools excluded)</div></div>
+  <div class="fact"><div class="v">5 V USB</div><div class="k">runs from any USB power bank</div></div>
+</div>
+
+<h2>Contents</h2>
+<ul class="toc">
+  <li><span class="n">1</span>Parts and tools<span class="d">what to order and prepare</span></li>
+  <li><span class="n">2</span>Print the enclosure<span class="d">five printed parts</span></li>
+  <li><span class="n">3</span>Prepare the Raspberry Pi<span class="d">SD card, operating system, firmware</span></li>
+  <li><span class="n">4</span>Assemble<span class="d">steps 1 – 8, with drawings</span></li>
+  <li><span class="n">5</span>Test before closing<span class="d">sensor, display, LED, buttons</span></li>
+  <li><span class="n">6</span>Close the instrument<span class="d">steps 9 – 10</span></li>
+  <li><span class="n">7</span>Start at power-on<span class="d">the boot service</span></li>
+  <li><span class="n">8</span>Acceptance test<span class="d">record sheet for each instrument</span></li>
+  <li><span class="n">A</span>Appendix: wiring reference<span class="d">pin table</span></li>
+  <li><span class="n">B</span>Appendix: troubleshooting the build<span class="d">symptoms and fixes</span></li>
+</ul>
+
+<h2>Who this is for</h2>
+<p>A technician comfortable with a soldering iron and with typing commands into a computer. All design files, firmware and documentation are open source (GPL-3.0) at <b>github.com/LowCostSensor/PRATICO-sensor</b>. You do not need to know Python or Linux: every command is printed in full. Where a command must be typed on the Raspberry Pi, it is shown in a grey box like this:</p>
+<pre><code>pratico-selftest        <span class="c"># text after # is a comment: don't type it</span></code></pre>
+
+<h2>Time</h2>
+<p>3D printing: a few hours, unattended. Raspberry Pi set-up (needs internet): 45 – 60 min. Assembly and wiring: about 1.5 h. Tests and acceptance: 20 min.</p>
+
+<h2>Safety</h2>
+<div class="warn">
+<ul>
+  <li>The soldering iron and heat-set inserts reach 200 – 350 °C. Use a stand, and work in a ventilated place.</li>
+  <li>Never wire or rewire anything while the Raspberry Pi is powered. Unplug the USB cable first.</li>
+  <li>A wire on the wrong pin can destroy the Raspberry Pi (5 V on a 3.3 V pin). Check every wire against the table before the first power-on.</li>
+</ul>
+</div>
+
+
+<!-- ======================= 1 PARTS ======================= -->
+<h1><span class="num">1</span>Parts and tools</h1>
+
+<h2>Bill of materials (one instrument)</h2>
+<table class="compact">
+  <thead><tr><th class="n">Qty</th><th>Part</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td class="n">1</td><td><b>Raspberry Pi Zero 2 W</b></td><td>with a 2 × 20 male header (the “Zero 2 WH” has it already soldered)</td></tr>
+    <tr><td class="n">1</td><td>microSD card, 8 GB or more</td><td>a good brand (class A1); cheap cards fail in heat</td></tr>
+    <tr><td class="n">1</td><td>USB power bank, 5 V, ≥ 1 A, + micro-USB cable</td><td>for the field; a 5 V phone charger works on the bench</td></tr>
+    <tr><td class="n">1</td><td><b>Adafruit LTR‑329</b> light sensor breakout</td><td>I²C address 0x29</td></tr>
+    <tr><td class="n">1</td><td>LED, 5 mm, green 525 nm</td><td>with a flange (rim) at the base</td></tr>
+    <tr><td class="n">1</td><td>LCD 1602 with I²C backpack</td><td>PCF8574 backpack, address 0x27 (e.g. Freenove I²C LCD 1602)</td></tr>
+    <tr><td class="n">2</td><td>Tactile switch, 6 × 6 mm</td><td>OK and MODE buttons</td></tr>
+    <tr><td class="n">1+</td><td>Cuvette, 10 mm light path</td><td>12.5 × 12.5 × 46 mm outside, 1.5 – 2 mL; order spares</td></tr>
+    <tr><td class="n">5</td><td>M3 heat-set insert, Ø 4 × 6 mm</td><td>3 in the optical block, 2 in the base</td></tr>
+    <tr><td class="n">17</td><td>Screws:<br>3 × M3×8 countersunk<br>2 × M3×6 countersunk<br>4 × M2×10 countersunk<br>2 × M2×6 · 4 × M2×5 · 2 × M2×4</td><td><br>optical block → base, from below<br>lid → front posts<br>lid → LCD corners → base posts<br>sensor → block · Pi → standoffs · button carrier → lid</td></tr>
+    <tr><td class="n">14</td><td>Dupont jumper wire, female–female, 10 cm</td><td>sensor 4, LCD 4, buttons 4, LED 2</td></tr>
+    <tr><td class="n">≈60 g</td><td>Black <b>matte</b> PLA filament</td><td>the inside of the box is part of the optics</td></tr>
+  </tbody>
+</table>
+<p class="small">Recommended, optional: an LED driver (NPN transistor such as BC547 or 2N2222, 100 Ω and 1 kΩ resistors) or at least a 100 Ω resistor in series with the LED. It makes the LED brightness less dependent on temperature.</p>
+
+<div class="tip"><p><b>Ordering for several instruments:</b> buy 10 – 20 % spare cuvettes, LEDs, switches, Dupont wires and SD cards. Cuvettes get scratched and are the part you will replace most often.</p></div>
+
+<h2>Tools</h2>
+<div class="cols">
+<ul class="check">
+  <li>Soldering iron, solder (and a heat-set insert tip if you have one)</li>
+  <li>Small Phillips / hex screwdrivers for M2 and M3</li>
+  <li>Craft knife (to cut the jumper on the sensor board)</li>
+  <li>Side cutters, tweezers</li>
+  <li>Multimeter (for troubleshooting)</li>
+</ul>
+<ul class="check">
+  <li>FDM 3D printer, 0.4 mm nozzle</li>
+  <li>A computer (Windows, macOS or Linux) with a microSD card reader</li>
+  <li>Wi-Fi network with internet access (only for the software set-up)</li>
+  <li>A cuvette filled with clean water (for the tests)</li>
+</ul>
+</div>
+
+<!-- ======================= 2 PRINT ======================= -->
+<h1><span class="num">2</span>Print the enclosure</h1>
+
+<figure class="keep">
+  <img src="../../images/build/build_00_parts.svg" style="max-height:88mm" alt="Printed parts, electronics and screws">
+  <figcaption>The five printed parts (top), the electronics (middle) and the screws (bottom).</figcaption>
+</figure>
+
+<p>The print files are in the repository folder <code>hardware/pratico3/cad/</code>:</p>
+<ul>
+  <li><code>pratico3_plate_X1C.3mf</code>: all five parts on one plate, already oriented (Bambu Lab X1 Carbon). Other printers: open it in your slicer or use the STEP/STL files.</li>
+  <li>The parts are: <b>base</b>, <b>lid</b>, <b>optical block</b>, <b>button carrier</b> and <b>cap</b>.</li>
+</ul>
+
+<table class="compact">
+  <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Material</td><td><b>Black matte PLA</b> only. Light reflected by a glossy or coloured surface reaches the sensor and changes the readings.</td></tr>
+    <tr><td>Nozzle / layer</td><td>0.4 mm / 0.20 mm</td></tr>
+    <tr><td>Walls / top–bottom</td><td>4 wall loops / 5 layers</td></tr>
+    <tr><td>Infill</td><td>15 % gyroid</td></tr>
+    <tr><td>Supports</td><td>none</td></tr>
+  </tbody>
+</table>
+
+<h2>Check the cuvette fit</h2>
+<p>Push a cuvette into the well of the optical block. It must slide all the way down <b>without play</b> (0.25 mm clearance per side). It must not wobble.</p>
+<div class="warn"><p><b>Do not sand the well.</b> Sanding makes it shiny and shiny walls reflect light. If the cuvette is too tight, reprint the block with a larger clearance (parameter in <code>pratico3_enclosure.py</code>).</p></div>
+
+<div class="note"><p><b>Heat.</b> PLA starts to soften at about 55 °C, a temperature that a closed vehicle or a dashboard in the sun easily reaches. The instruments must be kept in the shade and never left in a parked car. For very hot deployments, a matte black PETG print is more heat-resistant; check the cuvette fit again if you change material.</p></div>
+
+<!-- ======================= 3 SOFTWARE ======================= -->
+<h1><span class="num">3</span>Prepare the Raspberry Pi</h1>
+
+<p class="lead">Do this on the bare Raspberry Pi, before assembly, while the parts are printing. You need internet access only now; in the field the instrument works without any network.</p>
+
+<h2>3.1 Write the SD card</h2>
+<ol>
+  <li>On your computer install <b>Raspberry Pi Imager</b> (raspberrypi.com/software).</li>
+  <li>Choose <b>Device:</b> Raspberry Pi Zero 2 W. <b>OS:</b> Raspberry Pi OS (other) → <b>Raspberry Pi OS Lite (64-bit)</b>. <b>Storage:</b> your microSD card.</li>
+  <li>When asked, <b>edit the settings</b> (OS customisation):
+    <table class="compact" style="margin-top:2mm">
+      <tbody>
+        <tr><td style="width:38mm">Hostname</td><td>a unique name per instrument, e.g. <code>pratico-01</code>, <code>pratico-02</code> …</td></tr>
+        <tr><td>Username / password</td><td>username <code>fww</code> (used in this guide) and a password of your choice. Write it on the acceptance sheet (Section 8), keep it safe.</td></tr>
+        <tr><td>Wireless LAN</td><td>the Wi-Fi network you will use for the set-up; country <b>SL</b></td></tr>
+        <tr><td>Locale</td><td>time zone <b>Africa/Freetown</b>, your keyboard layout</td></tr>
+        <tr><td>Services</td><td><b>Enable SSH</b> (password authentication)</td></tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Write the card, put it in the Raspberry Pi and power it with the USB cable (the port marked <b>PWR</b>). Wait 2 – 3 minutes: the first boot is slow.</li>
+</ol>
+
+<h2>3.2 Connect from your computer</h2>
+<p>Open a terminal (Windows: <i>PowerShell</i>; macOS: <i>Terminal</i>) on a computer on the same Wi-Fi network and type, with your hostname:</p>
+<pre><code>ssh fww@pratico-01.local</code></pre>
+<p>Answer <code>yes</code> the first time, then type the password (nothing appears while you type). The prompt changes to <code>fww@pratico-01:~ $</code>. All the commands below are typed there.</p>
+<div class="note"><p>If <code>pratico-01.local</code> is not found, find the Pi's IP address in your router's list of connected devices and use <code>ssh fww@192.168.x.x</code> instead.</p></div>
+
+<h2>3.3 Update the system and enable the two I²C buses</h2>
+<pre><code>sudo apt update
+sudo apt full-upgrade -y
+sudo apt install -y i2c-tools pipx python3-dev</code></pre>
+<p>Open the boot configuration file:</p>
+<pre><code>sudo nano /boot/firmware/config.txt</code></pre>
+<p>Make sure these two lines are present (add them at the end if they are not):</p>
+<pre><code>dtparam=i2c_arm=on
+dtoverlay=i2c-gpio,bus=3,i2c_gpio_sda=17,i2c_gpio_scl=27</code></pre>
+<p>Save with <kbd>Ctrl</kbd>+<kbd>O</kbd>, <kbd>Enter</kbd>, exit with <kbd>Ctrl</kbd>+<kbd>X</kbd>. The first line turns on the bus of the light sensor (bus 1), the second creates the bus of the display (bus 3, on GPIO 17 and 27).</p>
+<div class="warn"><p>If an update installed a new kernel, the system may still be finishing it. Never cut the power while a command is running.</p></div>
+
+<h2>3.4 Install the PRATICO firmware</h2>
+<pre><code>pipx install pratico-sensor
+pipx ensurepath
+sudo reboot</code></pre>
+<p>Reconnect after about a minute (<code>ssh fww@pratico-01.local</code>) and check the version:</p>
+<pre><code>pratico-selftest --version</code></pre>
+<p>It must print <code>PRATICO 3 firmware 3.0.0</code> (or a later version). The firmware installs four commands:</p>
+<table class="compact">
+  <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td><code>pratico-selftest</code></td><td>hardware self test</td></tr>
+    <tr><td><code>pratico-cal</code></td><td>calibration (User Guide)</td></tr>
+    <tr><td><code>pratico-field</code></td><td>the field program with buttons and display (normally started automatically)</td></tr>
+    <tr><td><code>pratico-service install | uninstall | status</code></td><td>start the field program at every power-on</td></tr>
+  </tbody>
+</table>
+<p>Leave the boot service for later (Section 7). Shut down before assembling:</p>
+<pre><code>sudo poweroff</code></pre>
+<p>Wait until the green light on the Pi stops blinking, then unplug it.</p>
+
+<!-- ======================= 4 ASSEMBLE ======================= -->
+<h1><span class="num">4</span>Assemble</h1>
+<p class="lead">The step numbers match the large numbers on the drawings. Read the whole step before you start it.</p>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_01_inserts.svg" alt="Heat-set inserts"></div>
+  <div class="body"><div class="badge">1</div><div>
+    <h3>Heat-set inserts</h3>
+    <ol>
+      <li>Set the soldering iron to about <b>200 °C</b>.</li>
+      <li>Press <b>3 inserts</b> into the holes in the bottom of the optical block and <b>2 inserts</b> into the two front posts of the base.</li>
+      <li>Push straight down until each insert is <b>flush</b> with the surface. Let them cool.</li>
+    </ol>
+    <p class="parts"><b>Parts:</b> 5 × M3 insert, optical block, base</p>
+  </div></div>
+</div>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_02_ltr_prep.svg" style="max-height:78mm" alt="Cut SJ1, solder the header"></div>
+  <div class="body"><div class="badge">2</div><div>
+    <h3>Prepare the sensor board</h3>
+    <ol>
+      <li><b>Cut the jumper SJ1</b> on the back of the LTR‑329 board with a craft knife: cut the thin trace between the two pads. Otherwise the board's own green power LED shines into the sensor.</li>
+      <li>Solder the 5-pin header on the back of the board.</li>
+    </ol>
+    <p class="parts"><b>Parts:</b> LTR‑329 board and its header</p>
+  </div></div>
+</div>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_03_ltr_mount.svg" alt="LTR-329 onto the optical block"></div>
+  <div class="body"><div class="badge">3</div><div>
+    <h3>Mount the sensor</h3>
+    <ol>
+      <li>Place the board on the optical block with the <b>sensor chip facing the aperture</b> (the small window into the cuvette well).</li>
+      <li>Fix it with 2 screws. Do not overtighten: the board must sit flat, not bend.</li>
+    </ol>
+    <p class="parts"><b>Parts:</b> 2 × M2×6</p>
+  </div></div>
+</div>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_04_led.svg" alt="LED into its bore"></div>
+  <div class="body"><div class="badge">4</div><div>
+    <h3>Fit the LED</h3>
+    <ol>
+      <li>Push the LED into its bore on the opposite side of the well until its <b>flange touches</b> the block.</li>
+      <li>Bend the leads down. Remember: the <b>long lead is +</b> (anode).</li>
+    </ol>
+    <p class="parts"><b>Parts:</b> green LED</p>
+  </div></div>
+</div>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_05_block_in_base.svg" alt="Optical block into the base"></div>
+  <div class="body"><div class="badge">5</div><div>
+    <h3>Optical block into the base</h3>
+    <ol>
+      <li>Set the block on the three pads inside the base.</li>
+      <li>Turn the base over and fix the block <b>from below</b> with 3 countersunk screws.</li>
+    </ol>
+    <p class="parts"><b>Parts:</b> 3 × M3×8 countersunk</p>
+  </div></div>
+</div>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_06_pi.svg" alt="Raspberry Pi onto the standoffs"></div>
+  <div class="body"><div class="badge">6</div><div>
+    <h3>Raspberry Pi</h3>
+    <ol>
+      <li>Insert the prepared microSD card first: it is hard to reach later.</li>
+      <li>Place the Pi on its four standoffs with the <b>GPIO header toward the optical block</b> and the <b>PWR</b> port at the opening in the back wall.</li>
+      <li>Fix it with 4 screws.</li>
+    </ol>
+    <p class="parts"><b>Parts:</b> Raspberry Pi Zero 2 W, 4 × M2×5</p>
+  </div></div>
+</div>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_07_buttons.svg" alt="Buttons into the carrier, carrier under the lid"></div>
+  <div class="body"><div class="badge">7</div><div>
+    <h3>Buttons</h3>
+    <ol>
+      <li><b>A</b> · Put the two switches into the carrier. Seen from above: <b>left = OK</b>, <b>right = MODE</b>.</li>
+      <li>On each switch, solder one Dupont wire to each of two <b>diagonally opposite</b> pins. (Pins on the same side are always connected; diagonal pins are only connected when the button is pressed.)</li>
+      <li><b>B</b> · Screw the carrier under the lid. The switch tops must come out flush with the lid.</li>
+    </ol>
+    <p class="parts"><b>Parts:</b> 2 × tactile switch, button carrier, lid, 2 × M2×4, 4 Dupont wires (cut one end)</p>
+  </div></div>
+</div>
+
+<div class="step">
+  <div class="fig tall"><img src="../../images/build/build_08_wiring.svg" alt="Wiring to the GPIO header"></div>
+  <div class="body"><div class="badge">8</div><div>
+    <h3>Wiring</h3>
+    <p>Connect the 14 Dupont wires exactly as in the table. <b>Pin 1</b> is the header corner nearest the SD card. Odd pins (1, 3, 5 …) are on the inner row, even pins (2, 4, 6 …) on the row along the board edge.</p>
+    <table class="compact">
+      <thead><tr><th>From</th><th>To Raspberry Pi pin</th></tr></thead>
+      <tbody>
+        <tr><td>LTR‑329 <b>VIN</b> / <b>GND</b></td><td>pin <b>1</b> (3.3 V) / any GND</td></tr>
+        <tr><td>LTR‑329 <b>SDA</b> / <b>SCL</b></td><td>pin <b>3</b> (GPIO 2) / pin <b>5</b> (GPIO 3)</td></tr>
+        <tr><td>LCD <b>VCC</b> / <b>GND</b></td><td>pin <b>2</b> (5 V) / any GND</td></tr>
+        <tr><td>LCD <b>SDA</b> / <b>SCL</b></td><td>pin <b>11</b> (GPIO 17) / pin <b>13</b> (GPIO 27)</td></tr>
+        <tr><td>LED <b>long lead (+)</b> / short lead</td><td>pin <b>37</b> (GPIO 26) / pin <b>39</b> (GND)</td></tr>
+        <tr><td><b>OK</b> button (left), both wires</td><td>pin <b>7</b> (GPIO 4) and any GND</td></tr>
+        <tr><td><b>MODE</b> button (right), both wires</td><td>pin <b>40</b> (GPIO 21) and any GND</td></tr>
+      </tbody>
+    </table>
+    <p class="small">GND pins: 6, 9, 14, 20, 25, 30, 34, 39; any of them works. The LTR‑329 pin <b>3Vo</b> stays unconnected. The display uses GPIO 17/27 (the bus 3 set up in 3.3), <b>not</b> the hardware I²C pins 3/5.</p>
+  </div></div>
+</div>
+
+<!-- ======================= 5 TEST ======================= -->
+<h1><span class="num">5</span>Test before closing</h1>
+<p class="lead">Test with the lid still off: if something is wrong, every wire is still easy to reach.</p>
+
+<ol>
+  <li>Check every wire against the table in step 8 once more.</li>
+  <li>Rest the lid with the LCD loosely next to the base so nothing touches the Pi. Insert a cuvette filled with clean water and put the <b>cap</b> on.</li>
+  <li>Power on (USB into <b>PWR</b>), wait a minute and connect with <code>ssh fww@pratico-01.local</code>.</li>
+</ol>
+
+<h2>5.1 Are the sensor and the display found?</h2>
+<pre><code>i2cdetect -y 1          <span class="c"># must show 29 (light sensor)</span>
+i2cdetect -y 3          <span class="c"># must show 27 (display)</span></code></pre>
+<p>Each command prints a grid; the number must appear in it. All other cells show <code>--</code>.</p>
+<div class="warn"><p>If <code>i2cdetect -y 1</code> is very slow and finds nothing, SDA or SCL is shorted or stuck: switch off and look for a solder bridge or a wire on the wrong pin (Appendix B).</p></div>
+
+<h2>5.2 Self test</h2>
+<pre><code>pratico-selftest</code></pre>
+<p>The display shows <span class="lcd inline">Self test OK</span> and the terminal prints the dark signal and the LED level. Compare with the values of a good build:</p>
+<table class="compact">
+  <thead><tr><th>Quantity</th><th>Good build (gain 96×, 200 ms)</th><th>If not</th></tr></thead>
+  <tbody>
+    <tr><td>Dark signal</td><td>0 – 3 counts</td><td>above 20: light is leaking in (cap, SJ1 not cut, gaps)</td></tr>
+    <tr><td>LED level, water cuvette</td><td>about 30 – 40 % of full scale (FS)</td><td>above 75 %: see the settings in the User Guide; below 20 %: LED reversed, not pushed in, or wrong colour</td></tr>
+    <tr><td>Spread (CV) of the conversions</td><td>about 0.03 %</td><td>much larger: loose LED or cuvette</td></tr>
+  </tbody>
+</table>
+<p class="small">FS (full scale) = sensor counts ÷ 65 535. The sensor saturates near 60 000 counts (92 % FS).</p>
+
+<h2>5.3 LED and buttons</h2>
+<p>Download the test script and run it with the firmware's Python:</p>
+<pre><code>curl -LO https://raw.githubusercontent.com/LowCostSensor/PRATICO-sensor/main/tools/gpio_test.py
+~/.local/share/pipx/venvs/pratico-sensor/bin/python gpio_test.py --seconds 20</code></pre>
+<p>At the start both buttons must read <code>released</code>. The LED blinks three times and the script reports the light seen by the sensor. Then, for 20 seconds, press <b>OK</b> and <b>MODE</b>: each press must be printed with the right name. When everything passes: <code>sudo poweroff</code>, wait, unplug.</p>
+
+<!-- ======================= 6 CLOSE ======================= -->
+<h1><span class="num">6</span>Close the instrument</h1>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_09_close.svg" alt="LCD on the posts, lid on top"></div>
+  <div class="body"><div class="badge">9</div><div>
+    <h3>Display and lid</h3>
+    <ol>
+      <li>Lay the LCD on the four posts, <b>display up</b>.</li>
+      <li>Fold the wires so that <b>none crosses the light path</b> between LED, well and sensor, and none is pinched.</li>
+      <li>Put the lid on. Fix it with <b>4 × M2×10</b> through the LCD corners into the base posts and <b>2 × M3×6</b> into the front inserts.</li>
+    </ol>
+    <p class="parts"><b>Parts:</b> LCD, lid with buttons, 4 × M2×10, 2 × M3×6</p>
+  </div></div>
+</div>
+
+<div class="step">
+  <div class="fig"><img src="../../images/build/build_10_finish.svg" alt="Cuvette in the well, cap on, power"></div>
+  <div class="body"><div class="badge">10</div><div>
+    <h3>Ready</h3>
+    <ol>
+      <li>Cuvette in the well, <b>cap on top</b>. The cap keeps daylight out; never measure without it.</li>
+      <li>Plug the power bank into the <b>PWR</b> port. After about a minute the display lights up.</li>
+      <li>Label the instrument with its name (e.g. <b>PRATICO-01</b>, the same as the hostname).</li>
+    </ol>
+  </div></div>
+</div>
+
+<!-- ======================= 7 SERVICE ======================= -->
+<h1><span class="num">7</span>Start at power-on</h1>
+<p class="lead">In the field there is no computer: the instrument must start its program by itself when the power bank is plugged in. Connect once more with <code>ssh</code> and type:</p>
+<pre><code>pratico-service install
+sudo loginctl enable-linger fww</code></pre>
+<p>The first command installs the field program as a service and starts it; the display shows <span class="lcd inline">PRATICO 3 fw 3.0.0</span> and then asks for a blank. The second lets the service start at boot without anyone logging in (needed once per instrument).</p>
+<p>Check:</p>
+<pre><code>pratico-service status</code></pre>
+<pre><code>unit file : /home/fww/.config/systemd/user/pratico3.service
+enabled   : enabled
+active    : active
+firmware  : 3.0.0  config built-in defaults</code></pre>
+<p>Now unplug the power, plug it in again, and check that the display starts by itself within about a minute.</p>
+
+<h2>Keeping the clock right</h2>
+<p>The Raspberry Pi has no clock battery: it takes the date and time from the internet whenever it is connected to Wi-Fi. Results record whether the clock was synchronised. A simple way to keep it right in the field is to add a <b>phone hotspot</b> as a second Wi-Fi network:</p>
+<pre><code>sudo nmcli dev wifi connect "HOTSPOT-NAME" password "HOTSPOT-PASSWORD"</code></pre>
+<p>Switch the hotspot on for a minute after powering the instrument and the time is set.</p>
+
+<h2>Updating the firmware later</h2>
+<pre><code>pipx upgrade pratico-sensor
+pratico-service install</code></pre>
+<p>The calibration and the results in <code>~/PRATICO_3/</code> are kept.</p>
+
+<!-- ======================= 8 ACCEPTANCE ======================= -->
+<h1><span class="num">8</span>Acceptance test</h1>
+<p class="lead">Fill in one sheet per instrument and keep it with the instrument's records. An instrument goes to calibration only when every line is ticked.</p>
+
+<div class="formhead">
+  <div>Instrument name</div>
+  <div>Built by</div>
+  <div>Date</div>
+  <div>Raspberry Pi serial / MAC</div>
+  <div>SD card</div>
+  <div>Firmware version</div>
+</div>
+
+<table>
+  <thead><tr><th style="width:8mm"></th><th>Check</th><th>Expected</th><th style="width:34mm">Result</th></tr></thead>
+  <tbody>
+    <tr><td>☐</td><td>Cuvette slides in without play, cap closes</td><td>no wobble</td><td></td></tr>
+    <tr><td>☐</td><td>SJ1 cut on the LTR‑329 board</td><td>green LED on the board is off</td><td></td></tr>
+    <tr><td>☐</td><td><code>i2cdetect -y 1</code></td><td>29</td><td></td></tr>
+    <tr><td>☐</td><td><code>i2cdetect -y 3</code></td><td>27</td><td></td></tr>
+    <tr><td>☐</td><td>Self test, dark signal</td><td>0 – 3 counts (max 20)</td><td></td></tr>
+    <tr><td>☐</td><td>Self test, LED level with water</td><td>30 – 40 % FS (20 – 75 %)</td><td></td></tr>
+    <tr><td>☐</td><td>OK button / MODE button</td><td>correct names in <code>gpio_test</code></td><td></td></tr>
+    <tr><td>☐</td><td>Boot service: starts by itself after power-on</td><td>display shows <span class="lcd inline">Blank: DI water</span></td><td></td></tr>
+    <tr><td>☐</td><td>Water blank in the field program</td><td><span class="lcd inline">Blank OK 35% FS</span> (20 – 75 %)</td><td></td></tr>
+    <tr><td>☐</td><td>Instrument labelled with its name</td><td></td><td></td></tr>
+    <tr><td>☐</td><td>Username and password recorded in a safe place</td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+<div class="formhead" style="grid-template-columns: 1fr 1fr;">
+  <div>Notes</div>
+  <div>Signature</div>
+</div>
+
+<p style="margin-top:8mm">Next: <b>calibrate</b> the instrument (User Guide, Section 6).</p>
+
+<!-- ======================= A WIRING ======================= -->
+<h1><span class="num">A</span>Appendix: wiring reference</h1>
+
+<table>
+  <thead><tr><th>Signal</th><th>BCM GPIO</th><th class="c">Physical pin</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>LTR‑329 VIN</td><td>3.3 V</td><td class="c">1</td><td>3Vo not connected</td></tr>
+    <tr><td>LTR‑329 SDA / SCL</td><td>GPIO 2 / GPIO 3</td><td class="c">3 / 5</td><td>hardware I²C, bus 1, address 0x29</td></tr>
+    <tr><td>LCD VCC</td><td>5 V</td><td class="c">2</td><td></td></tr>
+    <tr><td>LCD SDA / SCL</td><td>GPIO 17 / GPIO 27</td><td class="c">11 / 13</td><td>software I²C, bus 3, address 0x27</td></tr>
+    <tr><td>LED anode (+)</td><td>GPIO 26</td><td class="c">37</td><td>active high; cathode to GND (pin 39)</td></tr>
+    <tr><td>OK button (left)</td><td>GPIO 4</td><td class="c">7</td><td>other side to GND, internal pull-up</td></tr>
+    <tr><td>MODE button (right)</td><td>GPIO 21</td><td class="c">40</td><td>other side to GND, internal pull-up</td></tr>
+    <tr><td>GND</td><td>–</td><td class="c">6, 9, 14, 20, 25, 30, 34, 39</td><td>any</td></tr>
+  </tbody>
+</table>
+
+<figure>
+  <img src="../../images/pratico3_render_wiring_top.png" style="max-height:95mm" alt="Space for the wires inside the base">
+  <figcaption>Space reserved for the Dupont connectors and wire bends inside the base (orange).</figcaption>
+</figure>
+
+<div class="note"><p><b>LCD pull-ups.</b> The LCD backpack pulls its data lines up to 5 V while GPIO 17/27 are 3.3 V pins. It works in practice; a bidirectional level shifter removes the risk if you build many units.</p></div>
+
+<!-- ======================= B TROUBLESHOOTING ======================= -->
+<h1><span class="num">B</span>Appendix: troubleshooting the build</h1>
+<table>
+  <thead><tr><th style="width:30%">Symptom</th><th style="width:30%">Likely cause</th><th>Check / fix</th></tr></thead>
+  <tbody>
+    <tr><td>Nothing on the display at power-on</td><td>field program not running, LCD wiring, contrast</td><td><code>pratico-service status</code>; <code>i2cdetect -y 3</code> must show 27; turn the small contrast screw on the back of the LCD</td></tr>
+    <tr><td>Display lit but shows only blocks</td><td>contrast, or program not started</td><td>turn the contrast screw; wait a minute after power-on</td></tr>
+    <tr><td><code>i2cdetect -y 1</code> very slow, nothing found</td><td>SDA/SCL shorted or stuck low</td><td>switch off; look for solder bridges on the LTR‑329 header; check pins 3 and 5</td></tr>
+    <tr><td><code>i2cdetect -y 1</code> fast, but no 29</td><td>sensor not powered, SDA/SCL swapped</td><td>check VIN → pin 1, GND, SDA → 3, SCL → 5</td></tr>
+    <tr><td><code>i2cdetect -y 3</code>: no 27, or error “no such file”</td><td>bus 3 not configured, LCD wiring</td><td>check the two lines in <code>/boot/firmware/config.txt</code> and reboot; LCD SDA → 11, SCL → 13</td></tr>
+    <tr><td>Self test: <code>Light leak/lid</code></td><td>light reaching the sensor with the LED off</td><td>cap on; SJ1 cut; no gaps; not in direct sun</td></tr>
+    <tr><td>Self test: <code>No signal</code></td><td>LED not lighting</td><td>LED reversed (long lead to pin 37), wire on the wrong pin, LED broken</td></tr>
+    <tr><td>Self test: <code>Saturated</code></td><td>too much light</td><td>cuvette missing; or lower the gain (User Guide, settings)</td></tr>
+    <tr><td>A button always reads pressed</td><td>wires on two pins of the same side</td><td>move one wire to the diagonal pin</td></tr>
+    <tr><td>Field program does not start after power-on</td><td>linger off</td><td><code>sudo loginctl enable-linger fww</code></td></tr>
+    <tr><td><code>pratico-…: command not found</code></td><td>PATH not updated yet</td><td><code>pipx ensurepath</code>, then log out and in again</td></tr>
+    <tr><td><code>ssh</code>: host not found</td><td>Pi not on the network or <code>.local</code> names not resolved</td><td>wait 2 min after power-on; use the IP address from the router</td></tr>
+  </tbody>
+</table>
+<p>Logs of the field program:</p>
+<pre><code>journalctl --user-unit=pratico3 -n 50</code></pre>
+
+<hr>
+<p class="small">PRATICO 3 Build Guide, version 1.0, November 2026. Drawings generated from the CAD dimensions. Design, firmware and documentation: github.com/LowCostSensor/PRATICO-sensor (GPL-3.0). If you use PRATICO in published work, please cite: Cirrone, R. G., Boldrini, A., Polvani, A., Arrigucci, M., Liu, X., Galgani, L., Woods, S., &amp; Loiselle, S. A. (2025). Low-Cost Optical Sensing for Nitrate and Phosphate: Advancing Community Freshwater Monitoring. <i>ACS ES&amp;T Water</i>, 5, 6258–6267. https://doi.org/10.1021/acsestwater.5c00314. Contact: Riccardo Gaetano Cirrone, riccardogaetano.cirrone@unipa.it.</p>
+
+</body>
+</html>

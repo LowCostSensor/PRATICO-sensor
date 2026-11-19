@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PRATICO 3 User Guide</title>
+<link rel="stylesheet" href="guide.css">
+<style>
+@page { @bottom-left { content: "PRATICO 3 · User Guide · v1.0"; } }
+.screens { display: flex; flex-wrap: wrap; gap: 2mm 3mm; align-items: center; margin: 1.5mm 0 1mm; }
+.screens .arrow { color: var(--muted); font-size: 11pt; }
+.flow { display: grid; grid-template-columns: 9mm 1fr 52mm; gap: 0 4mm; border-bottom: 1px solid var(--rule); padding: 3.2mm 0; break-inside: avoid; align-items: start; }
+.flow:first-of-type { border-top: 1px solid var(--rule); }
+.flow .n { width: 8mm; height: 8mm; border-radius: 50%; background: var(--accent); color: #fff; font: 700 10.5pt/8mm "Segoe UI", Arial, sans-serif; text-align: center; }
+.flow h3 { margin: .6mm 0 1.2mm; font-size: 10.8pt; }
+.flow ul, .flow ol { margin-bottom: 0; }
+.flow .scr { display: flex; flex-direction: column; gap: 1.6mm; align-items: flex-start; }
+.flow .scr .lcd { width: 100%; box-sizing: border-box; }
+.sheet td { height: 7.9mm; border-right: 1px solid var(--rule); }
+.sheet td:last-child { border-right: 0; }
+@page sheet { size: A4 landscape; margin: 13mm 14mm 15mm 14mm; }
+.sheetpage { page: sheet; }
+.sheetpage h1 { margin-bottom: 3mm; }
+.sheettop { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10mm; align-items: start; margin-bottom: 2mm; }
+.sheettop .formhead { grid-template-columns: 1fr 1fr; margin: 0; }
+.sheettop table { margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- ======================= COVER ======================= -->
+<section class="cover">
+  <div class="band">
+    <div class="kicker">PRATICO 3 · Low-cost colorimeter for nitrate and phosphate</div>
+    <h1>User Guide</h1>
+    <div class="sub">How to measure nitrate and phosphate in the field with PRATICO 3 and FreshWater Watch kits, how to calibrate the instrument, and how to look after it.</div>
+  </div>
+  <div class="photo"><img src="../../images/pratico3_photo_menu.jpg" style="object-position:center 55%" alt="PRATICO 3 showing the measurement menu"></div>
+  <div class="meta">
+    <div class="for">Prepared for the National Water Resources Management Agency (NWRMA), Sierra Leone</div>
+    <div style="text-align:right">Guide version 1.0 · November 2026<br>Firmware <b>3.0.0</b></div>
+  </div>
+</section>
+
+<!-- ======================= 0 ABOUT ======================= -->
+<h1><span class="num">0</span>About PRATICO 3</h1>
+
+<p class="lead">Citizen-science water monitoring often relies on matching a colour by eye against a printed chart. PRATICO 3 measures that colour with a light sensor and turns it into a number: the concentration in mg/L. Field teams keep the FreshWater Watch (FWW) method they already know, and the data become quantitative, comparable and traceable.</p>
+
+<div class="facts">
+  <div class="fact"><div class="v">N‑NO₃ · P‑PO₄</div><div class="k">nitrate-nitrogen and phosphate-phosphorus, in mg/L</div></div>
+  <div class="fact"><div class="v">2 buttons</div><div class="k">no computer, phone or network needed in the field</div></div>
+  <div class="fact"><div class="v">≈ 5 s</div><div class="k">per reading, with a quality check on every reading</div></div>
+  <div class="fact"><div class="v">Saved</div><div class="k">every result is stored on the instrument with its number</div></div>
+</div>
+
+<h2>Contents</h2>
+<ul class="toc">
+  <li><span class="n">1</span>Meet the instrument<span class="d">parts, buttons, how it works</span></li>
+  <li><span class="n">2</span>Before going to the field<span class="d">kit list and checks</span></li>
+  <li><span class="n">3</span>Measuring, step by step<span class="d">blank, sample, result</span></li>
+  <li><span class="n">4</span>Good measurement practice<span class="d">quality control, dilution, reporting</span></li>
+  <li><span class="n">5</span>Display messages<span class="d">what each message means</span></li>
+  <li><span class="n">6</span>Calibration<span class="d">standards, procedure, acceptance</span></li>
+  <li><span class="n">7</span>Getting the data<span class="d">results file, copying it to a computer</span></li>
+  <li><span class="n">8</span>Care and maintenance<span class="d">cleaning, storage, heat and humidity</span></li>
+  <li><span class="n">9</span>Troubleshooting<span class="d">symptoms and fixes</span></li>
+  <li><span class="n">A</span>Field data sheet<span class="d">to photocopy</span></li>
+  <li><span class="n">B</span>Settings and specifications<span class="d">reference</span></li>
+</ul>
+
+<h2>Who does what</h2>
+<table class="compact">
+  <thead><tr><th style="width:42mm">Task</th><th>Who</th><th>Needs</th></tr></thead>
+  <tbody>
+    <tr><td>Field measurements (Sections 2 – 5)</td><td>field officers, trained volunteers</td><td>the instrument, a power bank, FWW kits</td></tr>
+    <tr><td>Calibration (Section 6)</td><td>a laboratory technician</td><td>standards, a laptop with Wi-Fi</td></tr>
+    <tr><td>Data download (Section 7)</td><td>data officer or technician</td><td>a laptop with Wi-Fi</td></tr>
+  </tbody>
+</table>
+
+<!-- ======================= 1 MEET ======================= -->
+<h1><span class="num">1</span>Meet the instrument</h1>
+
+<div class="cols" style="grid-template-columns: 1.15fr 1fr; align-items:start">
+  <figure style="margin-top:0">
+    <div class="annot">
+      <img src="../../images/pratico3_photo_result.jpg" alt="PRATICO 3 seen from the front">
+      <span class="dot" style="left:53.7%; top:14%"></span><span class="lbl" style="left:33%; top:7%">① Cap over the well</span>
+      <span class="dot" style="left:65.3%; top:26.7%"></span><span class="lbl" style="left:60%; top:37%">② OK</span>
+      <span class="dot" style="left:74.5%; top:26.7%"></span><span class="lbl" style="left:80%; top:37%">③ MODE</span>
+      <span class="lbl" style="left:24%; top:72%">④ Display</span>
+      <span class="dot" style="left:68%; top:87%"></span><span class="lbl" style="left:86%; top:92%">⑤ Power</span>
+    </div>
+    <figcaption>Hold the instrument so that the display text is upright: OK is the left button, MODE the right one. (Photo taken before calibration, so the display shows absorbance only.)</figcaption>
+  </figure>
+  <div>
+    <table class="compact">
+      <tbody>
+        <tr><td style="width:8mm"><b>①</b></td><td><b>Cap and cuvette well.</b> The cuvette with the sample goes into the well, the cap goes on top to keep daylight out. Always measure with the cap on.</td></tr>
+        <tr><td><b>②</b></td><td><b>OK</b> (left): confirm, measure, start the timer.</td></tr>
+        <tr><td><b>③</b></td><td><b>MODE</b> (right): switch between nitrate and phosphate, go back. <b>Hold for 3 s</b>: take a new blank.</td></tr>
+        <tr><td><b>④</b></td><td><b>Display</b>: 2 lines of 16 characters.</td></tr>
+        <tr><td><b>⑤</b></td><td><b>Power</b>: micro-USB, 5 V from a USB power bank. There is no on/off switch: plugging in switches it on.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h2>How it works</h2>
+<svg viewBox="0 0 640 150" width="100%" style="max-height:44mm; display:block; margin:1mm 0 3mm" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+  <defs>
+    <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#2fb35a" stop-opacity=".9"/><stop offset="1" stop-color="#2fb35a" stop-opacity=".35"/></linearGradient>
+  </defs>
+  <rect x="0" y="0" width="640" height="150" fill="#fff"/>
+  <!-- LED -->
+  <path d="M40 52 h30 a18 18 0 0 1 0 36 h-30 z" fill="#d9f2e1" stroke="#17242c" stroke-width="1.5"/>
+  <text x="58" y="112" text-anchor="middle" fill="#17242c">green LED</text>
+  <text x="58" y="127" text-anchor="middle" fill="#6d7b84" font-size="10.5">525 nm</text>
+  <!-- beam -->
+  <rect x="88" y="62" width="470" height="16" fill="url(#beam)"/>
+  <!-- apertures -->
+  <rect x="150" y="30" width="8" height="32" fill="#17242c"/><rect x="150" y="78" width="8" height="32" fill="#17242c"/>
+  <rect x="470" y="30" width="8" height="32" fill="#17242c"/><rect x="470" y="78" width="8" height="32" fill="#17242c"/>
+  <text x="154" y="22" text-anchor="middle" fill="#6d7b84" font-size="10.5">aperture</text>
+  <text x="474" y="22" text-anchor="middle" fill="#6d7b84" font-size="10.5">aperture</text>
+  <!-- cuvette -->
+  <rect x="260" y="20" width="110" height="105" rx="3" fill="#f3ecd0" stroke="#17242c" stroke-width="1.5"/>
+  <rect x="268" y="40" width="94" height="78" fill="#d7c4e9" opacity=".85"/>
+  <text x="315" y="143" text-anchor="middle" fill="#17242c">cuvette with the coloured sample (10 mm)</text>
+  <!-- sensor -->
+  <rect x="560" y="45" width="22" height="50" fill="#0d5f7d"/>
+  <rect x="582" y="40" width="10" height="60" fill="#17242c"/>
+  <text x="585" y="122" text-anchor="middle" fill="#17242c">light sensor</text>
+</svg>
+<p>The LED shines green light through the cuvette onto a light sensor. The coloured product of the kit reaction absorbs part of the light: the more nitrate or phosphate, the darker the colour and the less light arrives. The instrument compares the light through the sample with the light through clean water (the <b>blank</b>) and computes the <b>absorbance</b>:</p>
+<p style="text-align:center; font-size:10.5pt"><b>A</b> = − log₁₀ ( light through sample ÷ light through blank )</p>
+<p>A <b>calibration</b>, made once with solutions of known concentration (standards), converts the absorbance into mg/L. Each instrument has its own calibration. Before every reading the instrument also measures with the LED off and subtracts that dark signal, and it checks that the light is stable and not saturated.</p>
+
+<!-- ======================= 2 BEFORE ======================= -->
+<h1><span class="num">2</span>Before going to the field</h1>
+
+<h2>Field kit</h2>
+<div class="cols">
+<ul class="check">
+  <li>PRATICO 3 instrument with its <b>cap</b></li>
+  <li>USB power bank, charged, and the micro-USB cable</li>
+  <li>2 or more clean <b>cuvettes</b> (10 mm)</li>
+  <li><b>Distilled or deionised water</b> (DI water) for the blank and rinsing, in a clean bottle</li>
+  <li>FWW <b>nitrate</b> and <b>phosphate</b> test kits, within their expiry date</li>
+  <li>Sampling bottle or cup</li>
+</ul>
+<ul class="check">
+  <li>Soft lint-free tissue for drying the cuvettes</li>
+  <li>Watch or phone with a timer</li>
+  <li>Field data sheets (Appendix A), pencil</li>
+  <li>Nitrile gloves, waste bottle for used reagent</li>
+  <li>Zip bag (rain, dust) and a shaded, cool box</li>
+  <li>Optional: check standard (Section 4), GPS or phone for coordinates</li>
+</ul>
+</div>
+
+<h2>Checks before leaving</h2>
+<ul class="check">
+  <li>The instrument has a valid calibration: at power-on the display shows <span class="lcd inline">Calibration</span> <span class="lcd inline">N:yes P:yes</span>.</li>
+  <li>The calibration is less than 6 months old, and no part has been changed since (Section 6).</li>
+  <li>The power bank is fully charged. A 10 000 mAh bank runs the instrument for well over a working day.</li>
+  <li>The cuvettes are clean and not scratched in the light path.</li>
+  <li>You know the reaction time to use for each kit (Section 4, “Reaction time”).</li>
+  <li><b>Clock:</b> if the instrument has a Wi-Fi network or phone hotspot configured, switch it on for a minute after power-on so the date and time are set. Otherwise always write the time on the data sheet.</li>
+</ul>
+
+<h2>Safety</h2>
+<div class="warn">
+<ul>
+  <li>Follow the safety instructions of the FWW kits. Wear gloves, do not touch the reagents, keep them away from children.</li>
+  <li>Never pour used reagent back into the river or lake. Collect it in the waste bottle and dispose of it as the kit instructions say.</li>
+  <li>Sample only where it is safe: firm banks, slow water, never alone at deep or fast water.</li>
+  <li>The instrument is <b>not waterproof</b>. Keep it dry and in the shade.</li>
+</ul>
+</div>
+
+<!-- ======================= 3 MEASURING ======================= -->
+<h1><span class="num">3</span>Measuring, step by step</h1>
+<p class="lead">The screens on the right are what the display shows. Numbers are examples.</p>
+
+<div class="flow">
+  <div class="n">1</div>
+  <div>
+    <h3>Switch on</h3>
+    <p>Plug the power bank into the instrument. After about a minute the program starts by itself: it shows the firmware version, then which analytes are calibrated.</p>
+    <p class="small">If a line shows <code>no</code>, that analyte gives absorbance only (no mg/L): the instrument must be calibrated first.</p>
+  </div>
+  <div class="scr"><span class="lcd">PRATICO 3
+fw 3.0.0</span><span class="lcd">Calibration
+N:yes P:yes</span></div>
+</div>
+
+<div class="flow">
+  <div class="n">2</div>
+  <div>
+    <h3>Blank</h3>
+    <ol>
+      <li>Rinse a cuvette and fill it with <b>DI water</b> (no reagent). Dry the outside.</li>
+      <li>Put it into the well, put the <b>cap</b> on, press <b>OK</b>.</li>
+      <li>Wait about 10 s without touching the instrument.</li>
+    </ol>
+    <p class="small">The blank stays valid while the instrument is on. Take a new one (<b>hold MODE 3 s</b>) every hour, after moving between shade and sun, or when the temperature changes a lot.</p>
+  </div>
+  <div class="scr"><span class="lcd">Blank: DI water
+lid closed, OK</span><span class="lcd">Blank ...
+keep lid closed</span><span class="lcd">Blank OK
+35% FS</span></div>
+</div>
+
+<div class="flow">
+  <div class="n">3</div>
+  <div>
+    <h3>Choose the analyte</h3>
+    <p>The first line shows the analyte that will be measured. Press <b>MODE</b> to switch between <b>N‑NO3</b> (nitrate) and <b>P‑PO4</b> (phosphate).</p>
+  </div>
+  <div class="scr"><span class="lcd">N-NO3 OK=measure
+MODE=N/P hold=bk</span></div>
+</div>
+
+<div class="flow">
+  <div class="n">4</div>
+  <div>
+    <h3>React the sample</h3>
+    <ol>
+      <li>Collect the water sample.</li>
+      <li>Add the FWW reagent <b>exactly as the kit instructions say</b>, and note the time.</li>
+      <li>Wait the reaction time (Section 4). Use the same time for every sample and for the calibration.</li>
+      <li>Fill a clean cuvette with the reacted sample (no bubbles), dry the outside.</li>
+    </ol>
+    <p class="small">If a countdown has been configured, the display asks <span class="lcd inline">Add reagent,</span>: add the reagent and press <b>OK</b>; insert the cuvette while it counts down; the reading starts by itself at 0. MODE skips the countdown.</p>
+  </div>
+  <div class="scr"><span class="lcd">Add reagent,
+OK=start timer</span><span class="lcd">N-NO3 wait  180s
+MODE = skip</span><p class="small" style="margin:0">only if a countdown is configured</p></div>
+</div>
+
+<div class="flow">
+  <div class="n">5</div>
+  <div>
+    <h3>Measure</h3>
+    <p>Put the cuvette into the well, always <b>the same way round</b>, put the cap on and press <b>OK</b>. The reading takes about 5 s. Do not move the instrument.</p>
+  </div>
+  <div class="scr"><span class="lcd">Measuring ...
+N-NO3</span></div>
+</div>
+
+<div class="flow">
+  <div class="n">6</div>
+  <div>
+    <h3>Read and record</h3>
+    <p>First line: the concentration in mg/L. Second line: the absorbance and the <b>sample number</b> (#). Write both on the data sheet with the site, time and any notes. The result is already saved on the instrument.</p>
+    <p>Press <b>OK</b> to return to the menu for the next sample.</p>
+  </div>
+  <div class="scr"><span class="lcd">N 0.533 mg/L
+A=0.095  #3</span></div>
+</div>
+
+<div class="flow">
+  <div class="n">7</div>
+  <div>
+    <h3>Switch off</h3>
+    <p>Unplug the power bank while the display shows a result or the menu, <b>never while it shows</b> <span class="lcd inline">Measuring ...</span> or <span class="lcd inline">Blank ...</span>. Rinse the cuvettes with DI water and let them dry.</p>
+  </div>
+  <div class="scr"></div>
+</div>
+
+<h2>Light and temperature</h2>
+<div class="note">
+<ul>
+  <li>Measure in the shade. Direct sun heats the instrument and can leak light into the well.</li>
+  <li>If the instrument has been in the sun or in a vehicle, or has moved between very different temperatures, wait 10 minutes and take a new blank (hold MODE 3 s).</li>
+</ul>
+</div>
+
+<!-- ======================= 4 PRACTICE ======================= -->
+<h1><span class="num">4</span>Good measurement practice</h1>
+
+<h2>The cuvette</h2>
+<ul>
+  <li>Hold it by the top or by the frosted sides, never on the clear faces the light passes through.</li>
+  <li>Fill it to at least 2 cm below the top; check that there are no bubbles (tap gently to remove them).</li>
+  <li>Dry the outside with soft tissue: drops, dust and fingerprints absorb light.</li>
+  <li>Always insert it the same way round, push it fully down, always put the cap on.</li>
+  <li>Rinse it with DI water between samples, then with a little of the next sample.</li>
+</ul>
+
+<h2>Reaction time</h2>
+<p>The colour keeps developing after the reagent is added; nitrate in particular changes by several percent in a few minutes. A different waiting time is a different result. So:</p>
+<ul>
+  <li>use <b>one fixed reaction time per kit</b>, the one in the kit instructions, for every sample;</li>
+  <li>use <b>the same time</b> for the calibration standards;</li>
+  <li>the instrument can time it for you (countdown, Section 6.6), and saves the actual time with every result.</li>
+</ul>
+
+<h2>Quality control in the field</h2>
+<table class="compact">
+  <thead><tr><th style="width:36mm">Check</th><th>How</th><th style="width:44mm">Accept if</th></tr></thead>
+  <tbody>
+    <tr><td><b>Check standard</b>, once per field day</td><td>a standard of known concentration (e.g. N 1 mg/L, P 0.2 mg/L), reacted and measured like a sample</td><td>within ±10 % of the known value</td></tr>
+    <tr><td><b>Field blank</b>, once per day</td><td>DI water reacted and measured like a sample</td><td>reads <code>&lt;LOD</code> or close to 0</td></tr>
+    <tr><td><b>Duplicate</b>, every 10 samples</td><td>a second portion of the same sample, reacted and measured separately</td><td>within ±10 %, or within 2 × LOD for low values</td></tr>
+  </tbody>
+</table>
+<p>If a check fails: take a new blank and repeat. If it fails again, do not report the day's results without a note, and have the calibration checked.</p>
+
+<h2>Results out of range</h2>
+<table class="compact">
+  <thead><tr><th style="width:42mm">Display</th><th>Meaning</th><th>What to report</th></tr></thead>
+  <tbody>
+    <tr><td><span class="lcd inline">N-NO3 &lt;LOD</span></td><td>below the detection limit (LOD) of this instrument's calibration</td><td>“&lt; LOD” and the LOD value (from the calibration report), not 0</td></tr>
+    <tr><td><span class="lcd inline">N 12.3 mg/L!</span> <span class="lcd inline">over range</span></td><td>above 1.1 × the highest calibration standard: not reliable</td><td>dilute and measure again (below)</td></tr>
+  </tbody>
+</table>
+<h3>How to dilute</h3>
+<p>Mix 1 part sample with 4 parts DI water (e.g. 2 mL + 8 mL): dilution factor 5. React and measure the diluted sample, then <b>multiply the result by 5</b>. Write the dilution on the data sheet. If it is still over range, dilute 1 + 9 (factor 10).</p>
+
+
+<!-- ======================= 5 MESSAGES ======================= -->
+<h1><span class="num">5</span>Display messages</h1>
+<table>
+  <thead><tr><th style="width:44mm">Message</th><th>Meaning</th><th>What to do</th></tr></thead>
+  <tbody>
+    <tr><td><span class="lcd inline">N 0.533 mg/L</span></td><td>result</td><td>record it with the sample number</td></tr>
+    <tr><td><span class="lcd inline">N-NO3 &lt;LOD</span></td><td>below the detection limit</td><td>report “&lt; LOD”</td></tr>
+    <tr><td><span class="lcd inline">N 12.3 mg/L!</span><br><span class="lcd inline">over range #12</span></td><td>above the calibrated range</td><td>dilute and measure again (Section 4)</td></tr>
+    <tr><td><span class="lcd inline">N-NO3 A only</span></td><td>no calibration for this analyte</td><td>record the absorbance; calibrate the instrument (Section 6)</td></tr>
+    <tr><td><span class="lcd inline">Light leak/lid</span></td><td>light reaches the sensor with the LED off</td><td>put the cap on properly, move into the shade, OK = retry</td></tr>
+    <tr><td><span class="lcd inline">Saturated</span></td><td>too much light</td><td>check that the cuvette is in the well; take a new blank</td></tr>
+    <tr><td><span class="lcd inline">No signal</span></td><td>almost no light reaches the sensor</td><td>sample far too dark (dilute), cuvette missing in the blank, or LED fault</td></tr>
+    <tr><td><span class="lcd inline">Unstable signal</span></td><td>the light changed during the reading</td><td>bubbles, cuvette moved, colour still developing: fix and press OK to retry</td></tr>
+    <tr><td><span class="lcd inline">Invalid signal</span></td><td>the absorbance could not be computed</td><td>take a new blank (hold MODE), measure again</td></tr>
+    <tr><td><span class="lcd inline">Blank low 15% FS</span></td><td>the blank lets through less light than expected</td><td>blank not clean water, dirty or wrong cuvette, cap not on; OK continues anyway</td></tr>
+    <tr><td><span class="lcd inline">Auto-range</span> <span class="lcd inline">gain 48x</span></td><td>the blank was too bright; the sensitivity was lowered automatically</td><td>nothing; the blank is repeated</td></tr>
+    <tr><td><span class="lcd inline">Release MODE</span></td><td>MODE held for 3 s</td><td>release it: a new blank follows</td></tr>
+    <tr><td><span class="lcd inline">Sensor timeout</span></td><td>the light sensor does not answer</td><td>switch off and on; if it repeats, technical check (wiring)</td></tr>
+    <tr><td>display dark or only blocks</td><td>program not started yet, or a fault</td><td>wait 2 minutes after power-on; then see Section 9</td></tr>
+  </tbody>
+</table>
+<p class="small">FS (full scale) is the share of the light sensor's range used by the blank. A water blank normally reads about 30 – 40 % FS.</p>
+
+<!-- ======================= 6 CALIBRATION ======================= -->
+<h1><span class="num">6</span>Calibration</h1>
+<p class="lead">Calibration links absorbance to concentration for one instrument. It is done in the laboratory by a technician, with a laptop connected to the instrument over Wi-Fi.</p>
+
+<h2>6.1 When to calibrate</h2>
+<ul>
+  <li>before first use of a new instrument;</li>
+  <li>after any repair or change to the LED, sensor, optical block or settings;</li>
+  <li>when a new batch of FWW kits is used, or when the reaction time is changed;</li>
+  <li>when the daily check standard fails twice;</li>
+  <li>in any case every 6 months.</li>
+</ul>
+
+<h2>6.2 What you need</h2>
+<ul>
+  <li>Stock standard solutions, 1000 mg/L, for nitrate and phosphate; DI water; volumetric flasks (100 mL); pipettes or a micropipette.</li>
+  <li>FWW kits from the batch that will be used in the field.</li>
+  <li>A laptop on the same Wi-Fi network as the instrument (see the Build Guide, Section 3), and the instrument's name and password.</li>
+</ul>
+<div class="warn"><p><b>“As N” or “as NO₃”?</b> Check the stock label. A stock of 1000 mg/L <b>as NO₃⁻</b> contains 226 mg/L N‑NO₃; a stock of 1000 mg/L <b>as PO₄³⁻</b> contains 326 mg/L P‑PO₄. Recalculate the volumes below if your stock is labelled that way.</p></div>
+
+<h2>6.3 Preparing the standards</h2>
+<p>Prepare them fresh on the day. First make an intermediate solution, then dilute it in 100 mL volumetric flasks and fill to the mark with DI water.</p>
+<div class="cols">
+<div>
+<h3>Nitrate (N‑NO₃)</h3>
+<p class="small">Intermediate 100 mg/L: 10.0 mL of 1000 mg/L stock → 100 mL.</p>
+<table class="compact">
+  <thead><tr><th class="n">Standard, mg/L</th><th class="n">mL of 100 mg/L in 100 mL</th></tr></thead>
+  <tbody>
+    <tr><td class="n">0.2</td><td class="n">0.20</td></tr>
+    <tr><td class="n">0.5</td><td class="n">0.50</td></tr>
+    <tr><td class="n">1</td><td class="n">1.00</td></tr>
+    <tr><td class="n">2</td><td class="n">2.00</td></tr>
+    <tr><td class="n">5</td><td class="n">5.00</td></tr>
+    <tr><td class="n">10</td><td class="n">10.0</td></tr>
+  </tbody>
+</table>
+</div>
+<div>
+<h3>Phosphate (P‑PO₄)</h3>
+<p class="small">Intermediate 10 mg/L: 1.00 mL of 1000 mg/L stock → 100 mL.</p>
+<table class="compact">
+  <thead><tr><th class="n">Standard, mg/L</th><th class="n">mL of 10 mg/L in 100 mL</th></tr></thead>
+  <tbody>
+    <tr><td class="n">0.02</td><td class="n">0.20</td></tr>
+    <tr><td class="n">0.05</td><td class="n">0.50</td></tr>
+    <tr><td class="n">0.1</td><td class="n">1.00</td></tr>
+    <tr><td class="n">0.2</td><td class="n">2.00</td></tr>
+    <tr><td class="n">0.5</td><td class="n">5.00</td></tr>
+    <tr><td class="n">1</td><td class="n">10.0</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+<p>Also prepare a <b>reagent blank</b>: DI water reacted with the kit like a sample. It is entered as level <code>0</code> and corrects for the colour of the reagent itself. Prepare a separate <b>check standard</b> (a different dilution from a different stock, if possible) to verify the calibration afterwards.</p>
+
+<h2>6.4 Running the calibration</h2>
+<ol>
+  <li>Switch the instrument on. On the laptop open a terminal (Windows: <i>PowerShell</i>) and connect, with the instrument's name:
+<pre><code>ssh fww@pratico-01.local</code></pre></li>
+  <li>Start the calibration for both analytes with 2 replicates per level:
+<pre><code>pratico-cal -a B -r 2</code></pre>
+  The field program is stopped automatically and restarted at the end.</li>
+  <li>The program proposes the levels (<code>0.2,0.5,1,2,5,10</code> for nitrate). Press <kbd>Enter</kbd> to accept, or type your own list; add <code>0</code> at the start to include the reagent blank, e.g. <code>0,0.2,0.5,1,2,5,10</code>.</li>
+  <li><b>Blank:</b> insert DI water, cap on, press <kbd>Enter</kbd> (or OK on the instrument).</li>
+  <li><b>Each level and replicate:</b> react the standard exactly like a sample, with the same reaction time; insert it, cap on, <kbd>Enter</kbd>. After each reading: <kbd>Enter</kbd> = accept, <kbd>r</kbd> = redo, <kbd>s</kbd> = skip the level.</li>
+  <li>The program fits a straight line and prints a table like this (example numbers):</li>
+</ol>
+<pre><code>  level  n   A mean      sd back-calc  recovery
+    0.5  2   0.0594  0.0004    0.4996     99.9%
+      1  2   0.1130  0.0006    1.0002    100.0%
+    ...
+  slope 0.10701 AU per mg/L   intercept +0.00598 AU   R2 0.99950
+  residual sd 1.20 mAU = 0.0112 mg/L   LOD 0.0370  LOQ 0.1121 mg/L   worst recovery 3.1% off</code></pre>
+<ol start="7">
+  <li>To leave out a level with a <b>known</b> problem (wrong dilution, bubble), type the level, e.g. <code>0.2</code>; type it again to bring it back. Press <kbd>Enter</kbd> to continue.</li>
+  <li>Answer <code>y</code> to save it as the active calibration. The old one is kept with a date in its name.</li>
+</ol>
+
+<h2>6.5 Is the calibration good?</h2>
+<table class="compact">
+  <thead><tr><th style="width:40mm">Look at</th><th>Accept if</th></tr></thead>
+  <tbody>
+    <tr><td><b>Recovery</b> of each level</td><td>within ±15 % (levels outside are marked). Do not judge by R² alone: it stays above 0.99 even when the lowest standards are 40 % off.</td></tr>
+    <tr><td><b>Check standard</b>, measured afterwards in the field program</td><td>within ±10 % of its value</td></tr>
+    <tr><td><b>LOD / LOQ</b></td><td>low enough for your monitoring purpose. Write them in the instrument's record: results below the LOD are reported as “&lt; LOD”.</td></tr>
+  </tbody>
+</table>
+<table class="compact">
+  <thead><tr><th style="width:52mm">Problem</th><th>Typical cause</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td>one level far off, others fine</td><td>wrong dilution, bubble, fingerprint</td><td>measure it again, or prepare it again; exclude only with a reason</td></tr>
+    <tr><td>low standards read too high, large intercept</td><td>reagent colour, timing</td><td>add a reagent blank (level 0), fix the reaction time</td></tr>
+    <tr><td>the line bends at the top</td><td>absorbance too high</td><td>leave out the top level and dilute samples above it</td></tr>
+    <tr><td>replicates disagree</td><td>cuvette position, colour still developing</td><td>same orientation, fixed reaction time</td></tr>
+  </tbody>
+</table>
+<p>A level can also be removed later without measuring again: the readings are saved in <code>~/PRATICO_3/calibration/</code>.</p>
+<pre><code>pratico-cal --refit ~/PRATICO_3/calibration/cal_P_20261118-120223.csv --exclude 0.05</code></pre>
+
+<h2>6.6 Setting the reaction countdown (optional)</h2>
+<p>To have the instrument time the reaction in both the field program and the calibration, create a settings file on the instrument:</p>
+<pre><code>nano ~/PRATICO_3/pratico3_config.json</code></pre>
+<p>Type one line with the times in seconds, for example (use the times of your kit instructions):</p>
+<pre><code>{"reaction_time_s": {"N": 300, "P": 120}}</code></pre>
+<p>Save (<kbd>Ctrl</kbd>+<kbd>O</kbd>, <kbd>Enter</kbd>, <kbd>Ctrl</kbd>+<kbd>X</kbd>) and restart the field program:</p>
+<pre><code>systemctl --user restart pratico3</code></pre>
+<div class="warn"><p>Changing the reaction time requires a new calibration.</p></div>
+
+<!-- ======================= 7 DATA ======================= -->
+<h1><span class="num">7</span>Getting the data</h1>
+
+<h2>Where the results are</h2>
+<p>Every result is written to the instrument's memory card <b>before</b> it is shown, in the file <code>~/PRATICO_3/results/results.csv</code> (one row per sample; opens in Excel). The main columns:</p>
+<table class="compact">
+  <thead><tr><th style="width:32mm">Column</th><th>Content</th></tr></thead>
+  <tbody>
+    <tr><td><code>seq</code></td><td>sample number, the # shown on the display</td></tr>
+    <tr><td><code>datetime</code>, <code>clock_synced</code></td><td>date and time; <code>clock_synced = 0</code> means the clock was not set (see below)</td></tr>
+    <tr><td><code>analyte</code></td><td><code>N-NO3</code> or <code>P-PO4</code></td></tr>
+    <tr><td><code>conc_mgL</code>, <code>flag</code></td><td>concentration in mg/L; flag empty, <code>&lt;LOD</code>, <code>&gt;range</code> or <code>no cal</code></td></tr>
+    <tr><td><code>A</code>, <code>sigma_A</code></td><td>absorbance and its uncertainty</td></tr>
+    <tr><td><code>reaction_s</code></td><td>reaction time measured by the countdown (empty if not used)</td></tr>
+    <tr><td><code>blank_age_s</code></td><td>seconds since the blank was taken</td></tr>
+    <tr><td><code>cal_date</code>, <code>fw</code></td><td>date of the calibration used, firmware version</td></tr>
+  </tbody>
+</table>
+<p class="small">Other columns (raw signals, dark, gain …) are for troubleshooting. Every single reading is also kept in <code>~/PRATICO_3/logs/</code>.</p>
+
+<div class="note"><p><b>Date and time.</b> The instrument has no clock battery; it sets its clock only when connected to Wi-Fi. When <code>clock_synced</code> is 0 the date may be wrong: use the sample number and the field data sheet to match results to sites and times.</p></div>
+
+<h2>Copying the results to a laptop</h2>
+<p>Switch the instrument on near the Wi-Fi network it knows. On the laptop, in PowerShell or Terminal:</p>
+<pre><code>scp fww@pratico-01.local:PRATICO_3/results/results.csv  pratico-01_results.csv</code></pre>
+<p>The file is copied into the current folder of the laptop (on Windows usually <code>C:\Users\&lt;name&gt;</code>). Alternatively use a graphical program such as <b>WinSCP</b> (Windows) with the same name, user and password.</p>
+<ul>
+  <li>Copy the data <b>after every field trip</b> and keep a backup. Do not delete the file on the instrument: new results are appended to it.</li>
+  <li>Add the site names from the field data sheets using the sample number <code>seq</code>.</li>
+</ul>
+
+<h2>Units for reporting</h2>
+<p>PRATICO reports <b>N‑NO₃</b> (nitrate as nitrogen) and <b>P‑PO₄</b> (phosphate as phosphorus), in mg/L. To compare with limits expressed as nitrate or phosphate ion:</p>
+<table class="compact" style="width:70%">
+  <tbody>
+    <tr><td>mg/L NO₃⁻ (nitrate)</td><td>= mg/L N‑NO₃ × <b>4.43</b></td></tr>
+    <tr><td>mg/L PO₄³⁻ (phosphate)</td><td>= mg/L P‑PO₄ × <b>3.07</b></td></tr>
+  </tbody>
+</table>
+
+<!-- ======================= 8 CARE ======================= -->
+<h1><span class="num">8</span>Care and maintenance</h1>
+
+<h2>Every use</h2>
+<ul class="check">
+  <li>Rinse the cuvettes with DI water, let them dry upside down, store them closed.</li>
+  <li>Wipe the instrument with a dry cloth. Never pour liquid into the well; if it happens, unplug, turn it over and let it dry for a day.</li>
+  <li>Recharge the power bank.</li>
+</ul>
+
+<h2>Storage</h2>
+<ul>
+  <li><b>Heat:</b> the case is 3D-printed plastic that softens at about 55 °C. Never leave the instrument in a parked vehicle, on a dashboard or in direct sun.</li>
+  <li><b>Humidity:</b> store it in a closed box or bag with silica gel sachets, especially in the rainy season. Let it warm up to room temperature before opening the bag, to avoid condensation.</li>
+  <li><b>Dust:</b> keep the cap on the well when not in use.</li>
+</ul>
+
+<h2>Periodic checks</h2>
+<table class="compact">
+  <thead><tr><th style="width:36mm">When</th><th>What</th></tr></thead>
+  <tbody>
+    <tr><td>every field day</td><td>check standard and field blank (Section 4)</td></tr>
+    <tr><td>monthly</td><td>blank level: a water blank should still read about 30 – 40 % FS. A slow decrease means a scratched cuvette or an ageing LED.</td></tr>
+    <tr><td>monthly</td><td>copy and back up the results file</td></tr>
+    <tr><td>every 6 months</td><td>recalibrate (Section 6); replace scratched cuvettes</td></tr>
+  </tbody>
+</table>
+
+<h2>Firmware updates</h2>
+<p>With the instrument connected to a network with internet access:</p>
+<pre><code>pipx upgrade pratico-sensor
+pratico-service install</code></pre>
+<p>The calibration and the results are kept. Record the new firmware version in the instrument's record.</p>
+
+<!-- ======================= 9 TROUBLESHOOTING ======================= -->
+<h1><span class="num">9</span>Troubleshooting</h1>
+<table>
+  <thead><tr><th style="width:30%">Symptom</th><th style="width:30%">Likely cause</th><th>What to do</th></tr></thead>
+  <tbody>
+    <tr><td>Display stays dark after 2 minutes</td><td>power bank empty or switched itself off, cable</td><td>charge the power bank; try another cable. Some power banks switch off at low current: use one with an “always on” or low-current mode.</td></tr>
+    <tr><td>Display lit but empty or only blocks</td><td>program not running</td><td>unplug, wait 10 s, plug in again. If it repeats: technician (Build Guide, Appendix B).</td></tr>
+    <tr><td><span class="lcd inline">Light leak/lid</span> keeps appearing</td><td>cap not seated, direct sun</td><td>cap on firmly, move into the shade, OK to retry</td></tr>
+    <tr><td><span class="lcd inline">Unstable signal</span> keeps appearing</td><td>bubbles, cuvette not pushed down, colour still changing</td><td>tap out bubbles, push the cuvette down, wait the full reaction time</td></tr>
+    <tr><td>Results drift during the day</td><td>old blank, temperature change</td><td>new blank (hold MODE 3 s); keep the instrument in the shade</td></tr>
+    <tr><td>Check standard fails</td><td>old standard, wrong reaction time, calibration no longer valid</td><td>prepare a fresh standard; check the timing; recalibrate</td></tr>
+    <tr><td>Buttons do nothing</td><td>program still starting, or a wiring fault</td><td>wait; if it persists, technician</td></tr>
+    <tr><td>Wrong date in the results</td><td>no Wi-Fi since power-on</td><td>normal; use <code>seq</code> and the field sheet</td></tr>
+    <tr><td><code>ssh</code>: host not found</td><td>instrument not on the Wi-Fi, or the laptop is on another network</td><td>wait 2 minutes after power-on; check that both are on the same network; use the IP address</td></tr>
+  </tbody>
+</table>
+<p>For a technician, the program's log shows what happened:</p>
+<pre><code>journalctl --user-unit=pratico3 -n 50
+pratico-service status</code></pre>
+
+<!-- ======================= A FIELD SHEET ======================= -->
+<section class="sheetpage">
+<h1><span class="num">A</span>Field data sheet</h1>
+<div class="sheettop">
+<div class="formhead">
+  <div>Instrument</div>
+  <div>Operator</div>
+  <div>Date</div>
+  <div>Water body / catchment</div>
+  <div>Kit batch N / P</div>
+  <div>Reaction time N / P</div>
+</div>
+<table class="compact">
+  <thead><tr><th>Daily QC</th><th style="width:22mm">Expected</th><th style="width:24mm">Measured</th><th style="width:10mm">OK</th></tr></thead>
+  <tbody>
+    <tr><td>Blank (% FS shown at <span class="lcd inline">Blank OK</span>)</td><td>30 – 40 %</td><td></td><td>☐</td></tr>
+    <tr><td>Check standard N</td><td></td><td></td><td>☐</td></tr>
+    <tr><td>Check standard P</td><td></td><td></td><td>☐</td></tr>
+    <tr><td>Field blank (DI water + reagent)</td><td>&lt; LOD</td><td></td><td>☐</td></tr>
+  </tbody>
+</table>
+</div>
+<table class="sheet">
+  <thead><tr>
+    <th style="width:10mm">#</th><th style="width:40mm">Site / sample ID</th><th style="width:16mm">Time</th><th style="width:40mm">GPS / location</th>
+    <th style="width:15mm">N or P</th><th style="width:20mm">mg/L</th><th style="width:18mm">A</th><th style="width:13mm">Dil.</th><th>Notes: flag, weather, water colour</th>
+  </tr></thead>
+  <tbody>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+<p class="small"># = sample number shown on the display. Dil. = dilution factor (1 if not diluted); the mg/L column is the value after multiplying by it.</p>
+</section>
+
+<!-- ======================= B REFERENCE ======================= -->
+<h1><span class="num">B</span>Settings and specifications</h1>
+
+<h2>Specifications</h2>
+<table class="compact">
+  <tbody>
+    <tr><td style="width:48mm">Analytes</td><td>N‑NO₃ and P‑PO₄ with FreshWater Watch colorimetric kits</td></tr>
+    <tr><td>Calibration ranges (default)</td><td>N‑NO₃ 0.2 – 10 mg/L; P‑PO₄ 0.02 – 1 mg/L (adjustable)</td></tr>
+    <tr><td>Detection limits</td><td>set by each instrument's calibration (shown in its calibration report). Published values for the previous version, PRATICO 2: 0.05 mg/L N‑NO₃ and 0.003 mg/L P‑PO₄.</td></tr>
+    <tr><td>Light source / detector</td><td>green LED, 525 nm / LTR‑329 light sensor, 16 bit</td></tr>
+    <tr><td>Cuvette</td><td>10 mm light path, 12.5 × 12.5 mm outside</td></tr>
+    <tr><td>Reading</td><td>dark + LED-on cycle, about 5 s; blank about 10 s</td></tr>
+    <tr><td>Quality checks</td><td>light leak, saturation, signal level, stability, on every reading</td></tr>
+    <tr><td>Size, power</td><td>85 × 60 × 44 mm; 5 V micro-USB (power bank)</td></tr>
+    <tr><td>Computer</td><td>Raspberry Pi Zero 2 W, Raspberry Pi OS; firmware <code>pratico-sensor</code> on PyPI</td></tr>
+    <tr><td>Data</td><td>CSV on the instrument's SD card, copied over Wi-Fi</td></tr>
+  </tbody>
+</table>
+
+<h2>Settings file</h2>
+<p>Settings are changed only by a technician, in <code>~/PRATICO_3/pratico3_config.json</code>, listing only the keys that differ from the defaults. Restart the field program afterwards (<code>systemctl --user restart pratico3</code>). Any change to the optical settings or the reaction time requires a new calibration.</p>
+<table class="compact">
+  <thead><tr><th>Key</th><th>Default</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>reaction_time_s</code></td><td><code>{"N": 0, "P": 0}</code></td><td>countdown from reagent to reading, s (0 = read on OK)</td></tr>
+    <tr><td><code>gain</code>, <code>integration_ms</code></td><td>96, 200</td><td>light sensor sensitivity and integration time</td></tr>
+    <tr><td><code>blank_repeats</code></td><td>2</td><td>readings averaged for the blank</td></tr>
+    <tr><td><code>cal_levels</code></td><td>N 0.2 – 10, P 0.02 – 1</td><td>levels proposed by the calibration</td></tr>
+    <tr><td><code>dark_max_counts</code>, <code>sat_counts</code>, <code>max_rel_spread</code></td><td>20, 60000, 0.02</td><td>quality-check limits</td></tr>
+  </tbody>
+</table>
+
+<hr>
+<p class="small">PRATICO 3 User Guide, version 1.0, November 2026. PRATICO is open source (GPL-3.0): github.com/LowCostSensor/PRATICO-sensor. If you use PRATICO in published work, please cite: Cirrone, R. G., Boldrini, A., Polvani, A., Arrigucci, M., Liu, X., Galgani, L., Woods, S., &amp; Loiselle, S. A. (2025). Low-Cost Optical Sensing for Nitrate and Phosphate: Advancing Community Freshwater Monitoring. <i>ACS ES&amp;T Water</i>, 5, 6258–6267. https://doi.org/10.1021/acsestwater.5c00314. Contact: Riccardo Gaetano Cirrone, riccardogaetano.cirrone@unipa.it.</p>
+
+</body>
+</html>

@@ -32,6 +32,11 @@ paper are also frozen in the v2.0.0 release.
 3. **Calibrate**: [docs/3-calibration.md](docs/3-calibration.md). Standards, blanks, fit, quality checks.
 4. **Measure in the field**: [docs/4-field-use.md](docs/4-field-use.md). Buttons, LCD messages, results file.
 
+**Printable PDF guides** (A4, English):
+[Build Guide](docs/pdf/PRATICO3_Build_Guide.pdf) (parts, printing, assembly, software, acceptance
+test) and [User Guide](docs/pdf/PRATICO3_User_Guide.pdf) (field measurement, quality control,
+calibration, data, maintenance, field data sheet). Sources in [`docs/pdf/src/`](docs/pdf/src/).
+
 How the measurement works and why these settings were chosen:
 [docs/5-measurement-protocol.md](docs/5-measurement-protocol.md).
 Problems: [docs/troubleshooting.md](docs/troubleshooting.md).
